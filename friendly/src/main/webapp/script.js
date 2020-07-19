@@ -123,14 +123,16 @@ function getRecommendationContainer() {
  */
 function getRecommendations() {
 
+    locationList = document.getElementById('locationFilterName');
+    locationName = locationList.options[locationList.selectedIndex].text;
+
     //Retrieve the groupName
     groupName = document.getElementById('groupNameInput').value;
 
     //Adding groupName to Query String
-    query = '/recommendation' + '?groupName='+ groupName ;
+    query = '/recommendation' + '?groupName='+ groupName + '&locationName=' + locationName;
     
-    fetch(query).then(response => response.json()).then(recommendations => { 
-
+    fetch(query).then(response => response.json()).then(recommendations => {
         const recommendationElement = document.getElementById("recommendation-list");
         recommendationElement.innerHTML = "";
 

@@ -2,6 +2,8 @@ package com.google.sps.servlets;
 
 import com.google.appengine.api.datastore.*;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.CompositeFilter;
+import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
 import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
@@ -58,10 +60,22 @@ public class RecommendationServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         
         String groupName = request.getParameter("groupName");
+        String locationName = request.getParameter("locationName").toUpperCase();
 
         //Retrieve data from Datastore
-        Query query = new Query("Recommendations")
-            .setFilter(new FilterPredicate("groupName", FilterOperator.EQUAL, groupName));
+        Query query = locationName.equals("ALL")
+            ? new Query("Recommendations")
+                .setFilter(new FilterPredicate("groupName", FilterOperator.EQUAL, groupName))
+            : new Query("Recommendations")
+                .setFilter(new CompositeFilter(
+                    CompositeFilterOperator.AND,
+                    Arrays.asList(
+                        new FilterPredicate("groupName", FilterOperator.EQUAL, groupName),
+                        new FilterPredicate("location", FilterOperator.EQUAL, locationName)
+                    )    
+                ));
+            
+            
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         PreparedQuery results = datastore.prepare(query);
