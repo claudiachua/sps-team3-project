@@ -5,6 +5,7 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.sps.model.Location;
@@ -61,7 +62,8 @@ public class RecommendationServlet extends HttpServlet {
 
         //Retrieve data from Datastore
         Query query = new Query("Recommendations")
-            .setFilter(new FilterPredicate("groupName", FilterOperator.EQUAL, groupName));
+            .setFilter(new FilterPredicate("groupName", FilterOperator.EQUAL, groupName))
+            .addSort("timestamp", SortDirection.DESCENDING);
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         PreparedQuery results = datastore.prepare(query);

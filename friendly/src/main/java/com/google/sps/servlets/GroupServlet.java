@@ -56,7 +56,8 @@ public class GroupServlet extends HttpServlet {
     String ownerEmail = userService.getCurrentUser().getEmail();
     
     Query query = new Query("Group")
-        .setFilter(new FilterPredicate("teamMembers", FilterOperator.EQUAL, ownerEmail));
+        .setFilter(new FilterPredicate("teamMembers", FilterOperator.EQUAL, ownerEmail))
+        .addSort("groupName", SortDirection.ASCENDING);
     
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
