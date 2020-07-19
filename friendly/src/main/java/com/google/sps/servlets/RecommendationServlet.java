@@ -7,6 +7,7 @@ import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
 import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.sps.model.Location;
@@ -66,6 +67,7 @@ public class RecommendationServlet extends HttpServlet {
         Query query = locationName.equals("ALL")
             ? new Query("Recommendations")
                 .setFilter(new FilterPredicate("groupName", FilterOperator.EQUAL, groupName))
+                .addSort("timestamp", SortDirection.DESCENDING)
             : new Query("Recommendations")
                 .setFilter(new CompositeFilter(
                     CompositeFilterOperator.AND,
@@ -73,9 +75,8 @@ public class RecommendationServlet extends HttpServlet {
                         new FilterPredicate("groupName", FilterOperator.EQUAL, groupName),
                         new FilterPredicate("location", FilterOperator.EQUAL, locationName)
                     )    
-                ));
-            
-            
+                ))
+                .addSort("timestamp", SortDirection.DESCENDING);
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         PreparedQuery results = datastore.prepare(query);
