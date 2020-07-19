@@ -21,6 +21,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
 import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
@@ -34,6 +35,7 @@ import com.google.sps.servlets.JsonUtility;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -127,10 +129,16 @@ public class GroupServlet extends HttpServlet {
         String userEmail = userService.getCurrentUser().getEmail();
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+
+        List<Filter> filters = new ArrayList<Filter>();
+        Filter groupNameFilter = new FilterPredicate("groupName", FilterOperator.EQUAL, groupName);
+        filters.add(groupNameFilter);
+
+        Filter ownerEmailFilter = new FilterPredicate("ownerEmail", FilterOperator.EQUAL, userEmail);       
+        filters.add(ownerEmailFilter);
         
         Query groupQuery = new Query("Group")
-            .setFilter(new FilterPredicate("groupName", FilterOperator.EQUAL, groupName))
-            .setFilter(new FilterPredicate("ownerEmail", FilterOperator.EQUAL, userEmail));
+            .setFilter(CompositeFilterOperator.and(filters));
         PreparedQuery groupResult = datastore.prepare(groupQuery);
 
         // Retrieve one and only result
