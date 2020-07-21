@@ -36,6 +36,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors; 
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -100,6 +102,11 @@ public class GroupServlet extends HttpServlet {
 
     response.getWriter().println("valid"); 
     members.add(ownerEmail);
+    // Construct a new list from the set constucted from elements 
+    // of the original list 
+    List<String> nonDuplicateMembers  = members.stream() 
+                                    .distinct() 
+                                    .collect(Collectors.toList()); 
 
     if (!groupName.isEmpty()) {
         long timestamp = System.currentTimeMillis();
@@ -107,7 +114,7 @@ public class GroupServlet extends HttpServlet {
         groupEntity.setProperty("timestamp", timestamp);
         groupEntity.setProperty("ownerId", ownerId);
         groupEntity.setProperty("ownerEmail", ownerEmail);
-        groupEntity.setProperty("teamMembers", members);
+        groupEntity.setProperty("teamMembers", nonDuplicateMembers);
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         datastore.put(groupEntity);
     }
