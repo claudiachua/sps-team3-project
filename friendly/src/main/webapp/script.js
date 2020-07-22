@@ -156,3 +156,7 @@ function getDeleteGroupContainer() {
         document.getElementById('delete-group-container').style.display = "block";
     }
 }
+
+//Fetch the latest recommendation data every 3 seconds
+window.setInterval(getRecommendations, 3000);
+
