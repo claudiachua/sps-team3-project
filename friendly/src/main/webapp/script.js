@@ -16,7 +16,6 @@
  */
 function getLoginStatus() {
     fetch('/login').then(response => response.json()).then((loginStatus) => {
-        console.log(loginStatus);
         const loginElement = document.getElementById('login');
         const groupElement = document.getElementById('groups');
         
