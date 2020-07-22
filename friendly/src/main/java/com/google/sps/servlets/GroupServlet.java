@@ -105,8 +105,8 @@ public class GroupServlet extends HttpServlet {
     // Construct a new list from the set constucted from elements 
     // of the original list 
     List<String> nonDuplicateMembers  = members.stream() 
-                                    .distinct() 
-                                    .collect(Collectors.toList()); 
+                                                .distinct()
+                                                .collect(Collectors.toList()); 
 
     if (!groupName.isEmpty()) {
         long timestamp = System.currentTimeMillis();
