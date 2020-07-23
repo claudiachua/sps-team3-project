@@ -1,0 +1,13 @@
+indexes:
+
+- kind: Group
+  properties:
+  - name: teamMembers
+  - name: groupName
+    direction: asc
+
+- kind: Recommendations
+  properties:
+  - name: groupName
+  - name: timestamp
+    direction: desc
