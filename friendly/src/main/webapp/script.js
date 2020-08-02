@@ -124,12 +124,19 @@ function getRecommendations() {
 
     locationList = document.getElementById('locationFilterName');
     locationName = locationList.options[locationList.selectedIndex].text;
+    priceList = document.getElementById('priceFilterName');
+    priceName = priceList.options[priceList.selectedIndex].text;
+    cuisineList = document.getElementById('cuisineFilterName');
+    cuisineName = cuisineList.options[cuisineList.selectedIndex].text;
 
     //Retrieve the groupName
     groupName = document.getElementById('groupNameInput').value;
 
     //Adding groupName to Query String
-    query = '/recommendation' + '?groupName='+ groupName + '&locationName=' + locationName;
+    query = '/recommendation' + '?groupName='+ groupName
+            + '&locationName=' + locationName
+            + '&priceName=' + priceName
+            + '&cuisineName=' + cuisineName;
     
     fetch(query).then(response => response.json()).then(recommendations => {
         const recommendationElement = document.getElementById("recommendation-list");
@@ -138,7 +145,10 @@ function getRecommendations() {
         //Convert each recommendation to html list
         recommendations.forEach(recommendation => {
             const liElement = document.createElement('li');
-            liElement.innerText = recommendation.restaurantName + " " + recommendation.location;
+            liElement.innerText = recommendation.restaurantName
+                    + " " + recommendation.location
+                    + " " + recommendation.price
+                    + " " + recommendation.cuisine;
             recommendationElement.append(liElement);
       });
         

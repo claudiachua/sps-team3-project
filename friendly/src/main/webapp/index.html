@@ -115,6 +115,20 @@
                             <option value="Central">Central</option>
                         </select>
                         <br>
+                        <label for="Price"><b>Price  </b></label>
+                        <select name="price">
+                            <option value="$">$</option>
+                            <option value="$$">$$</option>
+                            <option value="$$$">$$$</option>
+                        </select>
+                        <br>
+                        <label for="Cuisine"><b>Cuisine  </b></label>
+                        <select name="cuisine">
+                            <option value="Japanese">Japanese</option>
+                            <option value="Western">Western</option>
+                            <option value="Chinese">Chinese</option>
+                        </select>
+                        <br>
                         <button type="submit" class="btn">Add Recommendation</button>
                         <button type="button" class="btn cancel" onclick="closeRecommendationForm()">Close</button> 
                     </form>
@@ -128,6 +142,18 @@
                     <option value="East">East</option>
                     <option value="West">West</option>
                     <option value="Central">Central</option>
+                </select>
+                <select id='priceFilterName' name="price" onchange="getRecommendations();">
+                    <option value="All">All</option>
+                    <option value="$">$</option>
+                    <option value="$$">$$</option>
+                    <option value="$$$">$$$</option>
+                </select>
+                <select id='cuisineFilterName' name="cuisine" onchange="getRecommendations();">
+                    <option value="All">All</option>
+                    <option value="Japanese">Japanese</option>
+                    <option value="Western">Western</option>
+                    <option value="Chinese">Chinese</option>
                 </select>
             </div>
             <div id="recommendation-list"></div>

@@ -19,9 +19,13 @@ public final class Recommendation {
 
     private final String restaurantName;
     private final String location;
+    private final String price;
+    private final String cuisine;
 
-    public Recommendation(String restaurantName, String location) {
+    public Recommendation(String restaurantName, String location, String price, String cuisine) {
         this.restaurantName = restaurantName;
         this.location = location;
+        this.price = price;
+        this.cuisine = cuisine;
   }
 }

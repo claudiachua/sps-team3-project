@@ -10,8 +10,10 @@ import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.sps.model.Cuisine;
 import com.google.sps.model.Location;
 import com.google.sps.model.Name;
+import com.google.sps.model.Price;
 import com.google.sps.model.Recommendation;
 import com.google.sps.model.Restaurant;
 import com.google.sps.model.User;
@@ -19,6 +21,7 @@ import com.google.sps.servlets.JsonUtility;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,17 +44,21 @@ public class RecommendationServlet extends HttpServlet {
         String groupName = request.getParameter("groupName");
         Name restaurantName = new Name(request.getParameter("restaurantName"));      
         Location location = new Location(request.getParameter("location"));
+        Price price = new Price(request.getParameter("price"));
+        Cuisine cuisine = new Cuisine(request.getParameter("cuisine"));
 
         //Add new restaurant to datastore
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-        Entity reccomendationEntity = new Entity("Recommendations");
+        Entity recommendationEntity = new Entity("Recommendations");
         long timestamp = System.currentTimeMillis();
-        reccomendationEntity.setProperty("groupName", groupName); 
-        reccomendationEntity.setProperty("userEmail", userService.getCurrentUser().getEmail());
-        reccomendationEntity.setProperty("restaurantName", restaurantName.getName());
-        reccomendationEntity.setProperty("location", location.getLocation());
-        reccomendationEntity.setProperty("timestamp", timestamp);
-        datastore.put(reccomendationEntity);
+        recommendationEntity.setProperty("groupName", groupName); 
+        recommendationEntity.setProperty("userEmail", userService.getCurrentUser().getEmail());
+        recommendationEntity.setProperty("restaurantName", restaurantName.getName());
+        recommendationEntity.setProperty("location", location.getLocation());
+        recommendationEntity.setProperty("timestamp", timestamp);
+        recommendationEntity.setProperty("price", price.getPrice());
+        recommendationEntity.setProperty("cuisine", cuisine.getCuisine());
+        datastore.put(recommendationEntity);
 
         // Redirect back to the HTML page.
         response.sendRedirect("/index.html");
@@ -62,19 +69,33 @@ public class RecommendationServlet extends HttpServlet {
         
         String groupName = request.getParameter("groupName");
         String locationName = request.getParameter("locationName").toUpperCase();
+        String priceName = request.getParameter("priceName");
+        String cuisineName = request.getParameter("cuisineName");
 
         //Retrieve data from Datastore
-        Query query = locationName.equals("ALL")
+
+        Collection<Filter> predicateList = new ArrayList<Filter>(Arrays.asList(
+            new FilterPredicate("groupName", FilterOperator.EQUAL, groupName)
+        ));
+
+        if (!locationName.equals("ALL")) {
+            predicateList.add(new FilterPredicate("location", FilterOperator.EQUAL, locationName));
+        }
+        if (!priceName.equals("All")) {
+            predicateList.add(new FilterPredicate("price", FilterOperator.EQUAL, priceName));
+        }
+        if (!cuisineName.equals("All")) {
+            predicateList.add(new FilterPredicate("cuisine", FilterOperator.EQUAL, cuisineName));
+        }
+
+        Query query = predicateList.size() == 1
             ? new Query("Recommendations")
                 .setFilter(new FilterPredicate("groupName", FilterOperator.EQUAL, groupName))
                 .addSort("timestamp", SortDirection.DESCENDING)
             : new Query("Recommendations")
                 .setFilter(new CompositeFilter(
                     CompositeFilterOperator.AND,
-                    Arrays.asList(
-                        new FilterPredicate("groupName", FilterOperator.EQUAL, groupName),
-                        new FilterPredicate("location", FilterOperator.EQUAL, locationName)
-                    )    
+                    predicateList   
                 ))
                 .addSort("timestamp", SortDirection.DESCENDING);
 
@@ -86,7 +107,9 @@ public class RecommendationServlet extends HttpServlet {
         for (Entity entity : results.asIterable()) {
             String restaurantName = (String) entity.getProperty("restaurantName");
             String location = (String) entity.getProperty("location");
-            Recommendation recommendation = new Recommendation(restaurantName, location);
+            String price = (String) entity.getProperty("price");
+            String cuisine = (String) entity.getProperty("cuisine");
+            Recommendation recommendation = new Recommendation(restaurantName, location, price, cuisine);
             recommendations.add(recommendation);
         }
 
