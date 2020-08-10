@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns="http://appengine.google.com/ns/1.0">
+    <welcome-file-list>
+        <welcome-file>landing.html</welcome-file>
+    </welcome-file-list>
+
+    <!-- LandingServlet -->
+    <servlet>
+        <servlet-name>LandingServlet</servlet-name>
+        <servlet-class>com.google.sps.servlets.LandingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LandingServlet</servlet-name>
+        <url-pattern>/landing</url-pattern>
+    </servlet-mapping>
+
+    <!-- IndexServlet -->
+    <servlet>
+        <servlet-name>IndexServlet</servlet-name>
+        <servlet-class>com.google.sps.servlets.IndexServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+
+    <!-- LoginServlet -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.google.sps.servlets.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <!-- RecommendationServlet -->
+    <servlet>
+        <servlet-name>RecommendationServlet</servlet-name>
+        <servlet-class>com.google.sps.servlets.RecommendationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RecommendationServlet</servlet-name>
+        <url-pattern>/recommendation</url-pattern>
+    </servlet-mapping>
+
+    <!-- GroupServlet -->
+    <servlet>
+        <servlet-name>GroupServlet</servlet-name>
+        <servlet-class>com.google.sps.servlets.GroupServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GroupServlet</servlet-name>
+        <url-pattern>/group</url-pattern>
+    </servlet-mapping>
+
+    <!-- MessageServlet -->
+    <servlet>
+        <servlet-name>MessageServlet</servlet-name>
+        <servlet-class>com.google.sps.servlets.MessageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MessageServlet</servlet-name>
+        <url-pattern>/message</url-pattern>
+    </servlet-mapping>
+
+</web-app>

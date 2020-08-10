@@ -50,6 +50,13 @@
       <scope>test</scope>
     </dependency>
 
+    <dependency>
+        <!-- jsoup HTML parser library @ https://jsoup.org/ -->
+        <groupId>org.jsoup</groupId>
+        <artifactId>jsoup</artifactId>
+        <version>1.13.1</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -62,7 +69,7 @@
         <version>2.2.0</version>
         <configuration>
           <!-- TODO: set project ID. -->
-          <deploy.projectId>idwitami-sps-summer20</deploy.projectId>
+          <deploy.projectId>sps-team-96-summer20</deploy.projectId>
           <deploy.version>1</deploy.version>
         </configuration>
       </plugin>
