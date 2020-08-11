@@ -65,7 +65,7 @@
 
             <h3>Groups </h3>
 
-             <button id="create-group" onclick="createGroupForm()">Create a new group</button>
+             <button id="create-group" onclick="createGroupForm()">Create A New Group</button>
 
             <!-- The Modal -->
             <div id="groupModal" class="modal">
@@ -90,10 +90,10 @@
             </div>
 
             <div id="delete-group-container">
-                <button id="delete-group" type="button" class="deletebtn" onclick="createDeleteForm()">Delete group</button>
+                <button id="delete-group" type="button" class="deletebtn" onclick="createDeleteForm()">Delete Group</button>
                     
                 <div id="deleteModal" class="modal">
-                    <div class="delete-modal-content">
+                    <div class="modal-content">
                         <form class="form-container" id="deleteform">
                             <h1>Delete Group</h1>
                             <h3>Are you sure you want to delete the group?</h3>
@@ -115,7 +115,7 @@
                 <div id="recommendationModal" class="modal">
                     <div class="modal-content">
                         <form action="/recommendation" method="POST" class="form-container">
-                            <h1> Recommend a new restaurant </h1>
+                            <h1> Recommend A New Restaurant </h1>
                             <label for="RestaurantName"><b>Restaurant Name</b></label>
                             <input type="hidden" name="groupName" id="groupNameInput">
                             <input type="text" placeholder="Enter Restaurant Name" name="restaurantName" required>
