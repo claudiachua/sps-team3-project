@@ -150,9 +150,9 @@ function getRecommendations() {
             const innerDivElement = document.createElement('div');
             innerDivElement.className = "card";
             innerDivElement.innerHTML = recommendation.restaurantName
-                    + " " + recommendation.location
-                    + " " + recommendation.price
-                    + " " + recommendation.cuisine;
+                    + " | " + recommendation.location
+                    + " | " + recommendation.price
+                    + " | " + recommendation.cuisine;
 
             outerDivElement.append(innerDivElement)
             recommendationElement.append(outerDivElement);
