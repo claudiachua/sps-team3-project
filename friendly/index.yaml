@@ -11,3 +11,106 @@ indexes:
   - name: groupName
   - name: timestamp
     direction: desc
+
+- kind: Recommendations
+  properties:
+  - name: groupName
+  - name: timestamp
+    direction: desc
+  - name: location
+
+- kind: Recommendations
+  properties:
+  - name: groupName
+  - name: timestamp
+    direction: desc
+  - name: cuisine
+
+- kind: Recommendations
+  properties:
+  - name: groupName
+  - name: timestamp
+    direction: desc
+  - name: price
+
+- kind: Recommendations
+  properties:
+  - name: groupName
+  - name: timestamp
+    direction: desc
+  - name: location
+  - name: cuisine
+
+- kind: Recommendations
+  properties:
+  - name: groupName
+  - name: timestamp
+    direction: desc
+  - name: location
+  - name: price
+
+- kind: Recommendations
+  properties:
+  - name: groupName
+  - name: timestamp
+    direction: desc
+  - name: price
+  - name: cuisine
+
+- kind: Recommendations
+  properties:
+  - name: groupName
+  - name: timestamp
+    direction: desc
+  - name: price
+  - name: cuisine
+  - name: location
+
+- kind: Recommendations 
+  properties: 
+  - name: location 
+  - name: timestamp 
+    direction: desc
+
+- kind: Recommendations
+  properties:
+  - name: cuisine
+  - name: timestamp
+    direction: desc
+
+- kind: Recommendations
+  properties:
+  - name: price
+  - name: timestamp
+    direction: desc
+
+
+- kind: Recommendations
+  properties:
+  - name: location
+  - name: cuisine
+  - name: timestamp
+    direction: desc
+
+- kind: Recommendations
+  properties:
+  - name: location
+  - name: price
+  - name: timestamp
+    direction: desc
+
+- kind: Recommendations
+  properties:
+  - name: price
+  - name: cuisine
+  - name: timestamp
+    direction: desc
+
+
+- kind: Recommendations
+  properties:
+  - name: price
+  - name: cuisine
+  - name: location
+  - name: timestamp
+    direction: desc
