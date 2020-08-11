@@ -36,6 +36,10 @@
 	{
 		line-height: 180%;
 	}
+
+    #portfolio p {
+        height: 2.5em;
+    }
 	
 	strong
 	{
