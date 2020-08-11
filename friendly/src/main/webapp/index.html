@@ -6,9 +6,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+
     <title>Friendly</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
+
     <script src="script.js"></script>
 
     <script type="text/javascript">
@@ -49,115 +52,132 @@
     </script>
   </head>
 
-  <body onload="getLoginStatus();">
-    <h1> Landing Page </h1>
+  <body onload="getLoginStatus()">
 
-     <div id="login"></div>
+    <div class="topBar">
+        <h1>Friendly</h1>
+        <a id="login"></a>
+    </div>
 
      <div id="groups">
 
-        <button id="create-group" onclick="createGroupForm()">Create a new group </button>
+         <div id = "group-section">
 
-        <!-- The Modal -->
-        <div id="groupModal" class="modal">
+            <h3>Groups </h3>
 
-            <!-- Modal content -->
-            <div class="modal-content">
-                <form class="form-container" id="groupform">
-                    <h1>Create A New Group</h1>
-                    <label for="GroupName"><b>Group Name</b></label>
-                    <input type="text" placeholder="Enter Group Name" name="groupName" required>
-                    <label for="TeamMembers"><b>Team Members</b></label>
-                    <input type="text" placeholder="Enter Team member's email: using ';' to separate different members" name="teamMembers">
-                    <button type="button" id="sub" class="btn">Create</button>
-                    <button type="button" class="btn cancel" onclick="closeGroupForm()">Close</button> 
-                </form>
-            </div>
+             <button id="create-group" onclick="createGroupForm()">Create a new group</button>
 
-        </div>
+            <!-- The Modal -->
+            <div id="groupModal" class="modal">
 
-
-        <div id="data">
-            <select id="groups-list"></select>
-        </div>
-
-        <div id="delete-group-container">
-            <button id="delete-group" type="button" class="deletebtn" onclick="createDeleteForm()">Delete group</button>
-                  
-            <div id="deleteModal" class="modal">
-                <div class="delete-modal-content">
-                    <form class="form-container" id="deleteform">
-                        <h1>Delete Group</h1>
-                        <h3>Are you sure you want to delete the group?</h3>
-                        <p>This will also delete all recommendations corresponding to this group. This action is irreversible.</p>
-                        <button type="button" id="del" class="btn">Delete</button>
-                        <button type="button" class="btn cancel" onclick="closeDeleteForm()">Close</button> 
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div id="recommendation-container">
-            <button id="add-recommendation" onclick="createRecommendationForm()">Add New Recommendation</button>
-            <div id="recommendationModal" class="modal">
+                <!-- Modal content -->
                 <div class="modal-content">
-                    <form action="/recommendation" method="POST" class="form-container">
-                        <h1> Recommend a new restaurant </h1>
-                        <label for="RestaurantName"><b>Restaurant Name</b></label>
-                        <input type="hidden" name="groupName" id="groupNameInput">
-                        <input type="text" placeholder="Enter Restaurant Name" name="restaurantName" required>
-                        <label for="Location"><b>Location  </b></label>
-                        <select name="location">
-                            <option value="North">North</option>
-                            <option value="South">South</option>
-                            <option value="East">East</option>
-                            <option value="West">West</option>
-                            <option value="Central">Central</option>
-                        </select>
-                        <br>
-                        <label for="Price"><b>Price  </b></label>
-                        <select name="price">
-                            <option value="$">$</option>
-                            <option value="$$">$$</option>
-                            <option value="$$$">$$$</option>
-                        </select>
-                        <br>
-                        <label for="Cuisine"><b>Cuisine  </b></label>
-                        <select name="cuisine">
-                            <option value="Japanese">Japanese</option>
-                            <option value="Western">Western</option>
-                            <option value="Chinese">Chinese</option>
-                        </select>
-                        <br>
-                        <button type="submit" class="btn">Add Recommendation</button>
-                        <button type="button" class="btn cancel" onclick="closeRecommendationForm()">Close</button> 
+                    <form class="form-container" id="groupform">
+                        <h1>Create A New Group</h1>
+                        <label for="GroupName"><b>Group Name</b></label>
+                        <input type="text" placeholder="Enter Group Name" name="groupName" required>
+                        <label for="TeamMembers"><b>Team Members</b></label>
+                        <input type="text" placeholder="Enter Team member's email: using ';' to separate different members" name="teamMembers">
+                        <button type="button" id="sub" class="btn">Create</button>
+                        <button type="button" class="btn cancel" onclick="closeGroupForm()">Close</button> 
                     </form>
                 </div>
+
             </div>
-            <div id="recommendation-filter">
-                <select id='locationFilterName' name="location" onchange="getRecommendations();">
-                    <option value="All">All</option>
-                    <option value="North">North</option>
-                    <option value="South">South</option>
-                    <option value="East">East</option>
-                    <option value="West">West</option>
-                    <option value="Central">Central</option>
-                </select>
-                <select id='priceFilterName' name="price" onchange="getRecommendations();">
-                    <option value="All">All</option>
-                    <option value="$">$</option>
-                    <option value="$$">$$</option>
-                    <option value="$$$">$$$</option>
-                </select>
-                <select id='cuisineFilterName' name="cuisine" onchange="getRecommendations();">
-                    <option value="All">All</option>
-                    <option value="Japanese">Japanese</option>
-                    <option value="Western">Western</option>
-                    <option value="Chinese">Chinese</option>
-                </select>
+
+            <div id="data">
+                <select id="groups-list"></select>
             </div>
-            <div id="recommendation-list"></div>
+
+            <div id="delete-group-container">
+                <button id="delete-group" type="button" class="deletebtn" onclick="createDeleteForm()">Delete group</button>
+                    
+                <div id="deleteModal" class="modal">
+                    <div class="delete-modal-content">
+                        <form class="form-container" id="deleteform">
+                            <h1>Delete Group</h1>
+                            <h3>Are you sure you want to delete the group?</h3>
+                            <p>This will also delete all recommendations corresponding to this group. This action is irreversible.</p>
+                            <button type="button" id="del" class="btn">Delete</button>
+                            <button type="button" class="btn cancel" onclick="closeDeleteForm()">Close</button> 
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <div class = "vertical"></div> 
+        
+        <div id = "recommendation-section">
+            <h3>Recommendations</h3>
+            <div id="recommendation-container">
+                <button id="add-recommendation" onclick="createRecommendationForm()">Add New Recommendation</button>
+                <div id="recommendationModal" class="modal">
+                    <div class="modal-content">
+                        <form action="/recommendation" method="POST" class="form-container">
+                            <h1> Recommend a new restaurant </h1>
+                            <label for="RestaurantName"><b>Restaurant Name</b></label>
+                            <input type="hidden" name="groupName" id="groupNameInput">
+                            <input type="text" placeholder="Enter Restaurant Name" name="restaurantName" required>
+                            <label for="Location"><b>Location  </b></label>
+                            <select name="location">
+                                <option value="North">North</option>
+                                <option value="South">South</option>
+                                <option value="East">East</option>
+                                <option value="West">West</option>
+                                <option value="Central">Central</option>
+                            </select>
+                            <br>
+                            <label for="Price"><b>Price  </b></label>
+                            <select name="price">
+                                <option value="$">$</option>
+                                <option value="$$">$$</option>
+                                <option value="$$$">$$$</option>
+                            </select>
+                            <br>
+                            <label for="Cuisine"><b>Cuisine  </b></label>
+                            <select name="cuisine">
+                                <option value="Japanese">Japanese</option>
+                                <option value="Western">Western</option>
+                                <option value="Chinese">Chinese</option>
+                            </select>
+                            <br>
+                            <button type="submit" class="btn">Add Recommendation</button>
+                            <button type="button" class="btn cancel" onclick="closeRecommendationForm()">Close</button> 
+                        </form>
+                    </div>
+                </div>
+                
+                <div id="recommendation-filter">
+                    <h6> Fliter by:  </h6>
+                    <label> Location: </label>
+                    <select id='locationFilterName' name="location" onchange="getRecommendations();">
+                        <option value="All">All</option>
+                        <option value="North">North</option>
+                        <option value="South">South</option>
+                        <option value="East">East</option>
+                        <option value="West">West</option>
+                        <option value="Central">Central</option>
+                    </select>
+                    <label> Budget: </label>
+                    <select id='priceFilterName' name="price" onchange="getRecommendations();">
+                        <option value="All">All</option>
+                        <option value="$">$</option>
+                        <option value="$$">$$</option>
+                        <option value="$$$">$$$</option>
+                    </select>
+                    <label> Cuisine: </label>
+                    <select id='cuisineFilterName' name="cuisine" onchange="getRecommendations();">
+                        <option value="All">All</option>
+                        <option value="Japanese">Japanese</option>
+                        <option value="Western">Western</option>
+                        <option value="Chinese">Chinese</option>
+                    </select>
+                </div>
+                <div id="recommendation-list" class="row"></div>
+            </div>
+        </div>
+        
     </div>
 
   </body>
