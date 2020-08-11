@@ -1,43 +1,82 @@
+html,
+body {
+    height: 100%;
+    background-color: #333333;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1,h3 {
+    font-weight: bold;
+}
+
 #groups {
-    display: none /* Hidden by default */
+    display: none; /* Hidden by default */
+    text-align: center;
+    color: white;
+    width: 100%;
+}
+
+#group-section {
+    width:30%; 
+    float:left;
+    padding:30px;
+}
+
+#recommendation-section {
+    width:70%; 
+    float:right;
+    padding-top:30px;
+    padding-right: 30px;
+    text-align: center;
 }
 
 #recommendation-container {
-    display: none /* Hidden by default */
+    display: none; /* Hidden by default */
+    margin-top: 15px;
 }
 
 #delete-group-container {
     display: none /* Hidden by default */
 }
 
+label {
+    margin:5px;
+}
+
+/*********************************************************************************/
+/* Modal                                                                         */
+/*********************************************************************************/
+
 /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
 /* Modal Content */
 .modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  position: fixed;
-  border: 3px solid #f1f1f1;
+    color: black;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    position: fixed;
+    border: 3px solid #f1f1f1;
 }
 
 /* Add styles to the form container */
 .form-container {
-  padding: 10px;
-  background-color: white;
+    color: black;
+    padding: 10px;
+    background-color: white;
 }
 
 /* Full-width input fields */
@@ -57,7 +96,7 @@
 
 /* Set a style for the submit/login button */
 .form-container .btn {
-  background-color: #4CAF50;
+  background-color: #8DCB89;
   color: white;
   padding: 16px 20px;
   border: none;
@@ -76,3 +115,100 @@
 .form-container .btn:hover, .open-button:hover {
   opacity: 1;
 }
+
+/*********************************************************************************/
+/* Welcome Bar.                                                                  */
+/*********************************************************************************/
+
+/* Top bar */
+.topBar {
+  background-color: #8DCB89;
+  overflow: hidden;
+  text-align: center;
+  padding: 20px;
+  color: white;
+}
+
+
+/*********************************************************************************/
+/* Recommendation List                                                           */
+/*********************************************************************************/
+
+#recommendation-list {
+    padding-top: 20px;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+  margin-bottom: 20px;
+}
+
+/* Remove extra left and right margins, due to padding in columns */
+.row {
+    margin: 0 -5px;
+    }
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+  color: black;
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+
+/*********************************************************************************/
+/* Button Style                                                                  */
+/*********************************************************************************/
+
+button {
+    background: #6FC06A;
+	border-radius: 8px;
+	color: #FFF;
+    border: solid 1px #6FC06A;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+button:hover {
+  background-color: #333333; 
+  border: solid 1px #6FC06A;
+}
+
+/*********************************************************************************/
+/* Vertical Line Divider                                                         */
+/*********************************************************************************/
+
+.vertical { 
+    margin-top: 20px;
+    margin-bottom: 20px;
+    align-content: center;
+    height: 85%;
+    border-left: 1px solid #6FC06A; 
+    position:absolute; 
+    left: 27%; 
+} 

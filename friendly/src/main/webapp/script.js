@@ -21,8 +21,8 @@ function getLoginStatus() {
         
         loginElement.innerHTML = '<h4>Login Status: '+ loginStatus.loginStatus + '</h4>';
         if (loginStatus.loginStatus){
-                loginElement.innerHTML = '<h4> Hello, ' + loginStatus.userEmail + '!</h4>'
-                loginElement.appendChild(createRedirectButtonElement(loginStatus.logoutUrl, 'logout'));
+                loginElement.innerHTML = '<h4> Welcome, ' + loginStatus.userEmail + '!</h4>'
+                loginElement.appendChild(createRedirectButtonElement(loginStatus.logoutUrl, 'Logout'));
                 groupElement.style.display = "block";
                 getUserGroups(loginStatus.userEmail);
         }
@@ -42,10 +42,10 @@ function getUserGroups() {
     fetch('/group').then(response => response.json()).then((groupList) => {
         const groupData = document.getElementById("data");
         if (groupList.length === 0) {
-            groupData.innerHTML = '<h3>No groups Yet</h3>';
+            groupData.innerHTML = '<h4>No groups Yet</h4>';
         }
         else {
-            groupData.innerHTML = ('<h4>Your groups: </h4>');
+            groupData.innerHTML = ('<label>Select : </label>');
             groupDropdown = document.createElement('select');
             groupDropdown.setAttribute("id", "groupName");
             groupDropdown.setAttribute("onchange","getRecommendationContainer(); getDeleteGroupContainer();",); 
@@ -142,14 +142,21 @@ function getRecommendations() {
         const recommendationElement = document.getElementById("recommendation-list");
         recommendationElement.innerHTML = "";
 
-        //Convert each recommendation to html list
+        //Convert each recommendation to html card
         recommendations.forEach(recommendation => {
-            const liElement = document.createElement('li');
-            liElement.innerText = recommendation.restaurantName
+
+            const outerDivElement = document.createElement('div');
+            outerDivElement.className = "column";
+            const innerDivElement = document.createElement('div');
+            innerDivElement.className = "card";
+            innerDivElement.innerHTML = recommendation.restaurantName
                     + " " + recommendation.location
                     + " " + recommendation.price
                     + " " + recommendation.cuisine;
-            recommendationElement.append(liElement);
+
+            outerDivElement.append(innerDivElement)
+            recommendationElement.append(outerDivElement);
+
       });
         
     }); 
