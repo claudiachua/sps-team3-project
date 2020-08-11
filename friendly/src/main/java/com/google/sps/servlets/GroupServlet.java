@@ -30,7 +30,7 @@ import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
-import com.google.sps.servlets.JsonUtility;
+import com.google.sps.util.JsonUtility;
 
 import java.io.IOException;
 import java.util.ArrayList;

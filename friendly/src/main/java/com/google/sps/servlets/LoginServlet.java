@@ -22,7 +22,7 @@ import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.sps.model.LoginStatus;
-import com.google.sps.servlets.JsonUtility;
+import com.google.sps.util.JsonUtility;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,38 +42,36 @@ public class LoginServlet extends HttpServlet {
 
     LoginStatus loginStatus = new LoginStatus();
 
+    String loginUrl = userService.createLoginURL("/index");
+    loginStatus.loginUrl = loginUrl;
+
     // If user is not logged in, show a login form (could also redirect to a login page)
     if (!userService.isUserLoggedIn()) {
-        String loginUrl = userService.createLoginURL("/");
         loginStatus.loginStatus = false;
-        loginStatus.loginUrl = loginUrl;
-        String json = JsonUtility.convertToJsonUsingGson(loginStatus);
-        out.println(json);
-      return;
-    }
-
-    loginStatus.loginStatus = true;
-    String userEmail = userService.getCurrentUser().getEmail();
-    loginStatus.userEmail = userEmail;
+    } else {
+        loginStatus.loginStatus = true;
+        String userEmail = userService.getCurrentUser().getEmail();
+        loginStatus.userEmail = userEmail;
 
     /**
      *If the user is not in the datastore, put the user into the datastore 
      *thus the user could be inside a group 
      */
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Query query = new Query("User")
         .setFilter(new FilterPredicate("userEmail", FilterOperator.EQUAL, userEmail));
     PreparedQuery results = datastore.prepare(query);
     if (results.countEntities() == 0) {
-        Entity userEntity = new Entity("User");
-        long timestamp = System.currentTimeMillis();
-        userEntity.setProperty("userEmail", userEmail);
-        userEntity.setProperty("timestamp", timestamp);
-        datastore.put(userEntity);
+            Entity userEntity = new Entity("User");
+            long timestamp = System.currentTimeMillis();
+            userEntity.setProperty("userEmail", userEmail);
+            userEntity.setProperty("timestamp", timestamp);
+            datastore.put(userEntity);
+        }
     }
 
     // User is logged in and has a nickname, so the request can proceed
-    String logoutUrl = userService.createLogoutURL("/");
+    String logoutUrl = userService.createLogoutURL("/landing");
     loginStatus.logoutUrl = logoutUrl;
     String json = JsonUtility.convertToJsonUsingGson(loginStatus);
     out.println(json);

@@ -17,7 +17,7 @@ import com.google.sps.model.Price;
 import com.google.sps.model.Recommendation;
 import com.google.sps.model.Restaurant;
 import com.google.sps.model.User;
-import com.google.sps.servlets.JsonUtility;
+import com.google.sps.util.JsonUtility;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;

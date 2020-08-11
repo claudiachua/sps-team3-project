@@ -1,4 +1,4 @@
-package com.google.sps.servlets;
+package com.google.sps.util;
 
 import com.google.gson.Gson;
 
