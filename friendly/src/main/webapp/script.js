@@ -167,8 +167,8 @@ function getRecommendations() {
 
             const innerDivElement = document.createElement('div');
             innerDivElement.className = "card";
-            innerDivElement.innerHTML = recommendation.restaurantName
-                    + " | " + recommendation.location
+            innerDivElement.innerHTML = recommendation.restaurantName + "<br/>"
+                    + recommendation.location
                     + " | " + recommendation.price
                     + " | " + recommendation.cuisine;
 
