@@ -89,7 +89,7 @@ public class GroupServlet extends HttpServlet {
 
     for (String userEmail: members) {
         if (!validateGroupUser(userEmail)) {
-            response.getWriter().println("User does not exist."); 
+            response.getWriter().println("User " + userEmail + " does not exist."); 
             return; 
         }
     }
