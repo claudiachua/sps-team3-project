@@ -68,11 +68,11 @@ label {
     background-color: #333333;
     margin: 100px;
     padding: 20px;
-    width: 1000px;
+    width: 550px;
     position: absolute;
     left: 50%;
     top: 50%; 
-    transform: translate(-60%, -85%);
+    transform: translate(-68%, -70%);
     border: 5px solid #f1f1f1;
 }
 
