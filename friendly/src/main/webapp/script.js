@@ -147,14 +147,33 @@ function getRecommendations() {
 
             const outerDivElement = document.createElement('div');
             outerDivElement.className = "column";
+
+            //Photo based on cuisines
+            const imgElement = document.createElement('IMG');
+            imgElement.className = "cuisine-img"
+            switch (recommendation.cuisine) {
+                case 'Japanese':
+                    img = "images/japanese.jpg";
+                    break;
+                case 'Western':
+                    img = "images/western.jpg";
+                    break;
+                case 'Chinese':
+                    img = "images/chinese.jpg";
+                    break;
+            }
+            imgElement.src = img;
+            
+
             const innerDivElement = document.createElement('div');
             innerDivElement.className = "card";
-            innerDivElement.innerHTML = recommendation.restaurantName
-                    + " | " + recommendation.location
+            innerDivElement.innerHTML = recommendation.restaurantName + "<br/>"
+                    + recommendation.location
                     + " | " + recommendation.price
                     + " | " + recommendation.cuisine;
 
-            outerDivElement.append(innerDivElement)
+            outerDivElement.append(imgElement);
+            outerDivElement.append(innerDivElement);
             recommendationElement.append(outerDivElement);
 
       });
